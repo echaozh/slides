@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Zhang Yichao zhang_yichao@vobile.cn" />
+  <title>Concurrent Programming in C++ &amp; Python</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="reveal.js/css/reveal.min.css"/>
+    <style type="text/css">code{white-space: pre;}</style>
+    <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
+  <link rel="stylesheet" media="print" href="reveal.js/css/print/pdf.css" />
+  <!--[if lt IE 9]>
+  <script src="reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">Concurrent Programming in C++ &amp; Python</h1>
+    <h2 class="author">Zhang Yichao <script type="text/javascript">
+<!--
+h='&#118;&#x6f;&#98;&#x69;&#108;&#x65;&#46;&#x63;&#110;';a='&#64;';n='&#122;&#104;&#x61;&#110;&#x67;&#x5f;&#x79;&#x69;&#x63;&#104;&#x61;&#x6f;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#122;&#104;&#x61;&#110;&#x67;&#x5f;&#x79;&#x69;&#x63;&#104;&#x61;&#x6f;&#32;&#x61;&#116;&#32;&#118;&#x6f;&#98;&#x69;&#108;&#x65;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#110;</noscript></h2>
+    <h3 class="date">3/10/2014</h3>
+</section>
+
+<section><section id="concurrent-programming" class="titleslide slide level1"><h1>Concurrent Programming</h1></section><section id="why" class="slide level2">
+<h1>Why?</h1>
+<ul>
+<li>Multiple cores</li>
+<li>Massive incoming clients &amp; requests on server</li>
+<li>Wait for server on client</li>
+</ul>
+</section><section id="challenges-performance" class="slide level2">
+<h1>Challenges: Performance</h1>
+<ul>
+<li>C10K/C10M</li>
+<li>Threads: startup cost &amp; race conditions</li>
+<li>Python: GIL</li>
+</ul>
+</section><section id="our-answers" class="slide level2">
+<h1>Our Answers</h1>
+<ul>
+<li><code>libevent</code> to handle concurrent clients</li>
+<li><code>zmq</code> for sync interface upon an async implentation</li>
+<li>Thread/Process pools with locked queues and condition vars</li>
+<li>Background threads with locks and condition vars</li>
+</ul>
+</section><section id="challenges-ease-of-use-maintainability" class="slide level2">
+<h1>Challenges: Ease of use &amp; Maintainability</h1>
+<ul>
+<li><code>libevent</code> is hard, as callbacks are hard (callback hell)</li>
+<li><code>zmq</code> is too low level: typeless, and manual threading</li>
+<li>Thread pools are low level too; Process pool: process keepalive</li>
+<li>Locks and condition vars are hard to reason about: heisenbugs</li>
+</ul>
+</section></section>
+<section><section id="to-work-with-concurrency" class="titleslide slide level1"><h1>To Work with Concurrency</h1></section><section id="options-out-there" class="slide level2">
+<h1>Options out there</h1>
+<ul>
+<li>Atomics &amp; lock-free data structures</li>
+<li>Concurrency libraries</li>
+<li>Actor model</li>
+<li>Futures/promises</li>
+<li>Software transactional memory</li>
+</ul>
+</section><section id="atomics-lockless-data-structures" class="slide level2">
+<h1>Atomics &amp; Lockless Data Structures</h1>
+<ul>
+<li>Fast and convenient: no locking, good for flags (quit, etc)</li>
+<li>May still be race conditions</li>
+<li>.. especially with more advanced tricks like CAS</li>
+<li>Lock-free but not wait-free: some threads may starve</li>
+<li>RCU: in hashidxd</li>
+<li>C++11's got atomics</li>
+<li>Boost's got lock free lib</li>
+<li>It's actually the easiest to understand and use</li>
+<li>Still have to work with threads and manage shared states</li>
+</ul>
+</section><section id="concurrency-libraries" class="slide level2">
+<h1>Concurrency Libraries</h1>
+<ul>
+<li>Thread Building Blocks</li>
+<li>OpenMP</li>
+<li>Easy to use</li>
+<li>Good performance</li>
+<li>Can you divide tasks into smaller pieces?</li>
+</ul>
+</section><section id="actor-model" class="slide level2">
+<h1>Actor Model</h1>
+<ul>
+<li>Popularized by Erlang</li>
+<li>Google made Go, which faces C/C++ based programmers</li>
+<li>C++ library: <code>libcppa</code></li>
+<li>State/part of state managed by single thread, no race condition</li>
+<li>Good for data storage/access layer and decision makers</li>
+<li>Bad for fine grained data access: e.g. bank accounts processing</li>
+</ul>
+</section><section id="futurespromises" class="slide level2">
+<h1>Futures/Promises</h1>
+<ul>
+<li>Callbacks turned inside out
+<ul>
+<li>Instead of executing function takes callbacks</li>
+<li>.. the calculated value gets the callbacks</li>
+<li>.. before it's calculated</li>
+</ul></li>
+<li>On client side, you can wait for all futures at once</li>
+<li>On server, consider coroutines (Boost's got it too)</li>
+<li>Without coroutines, still callback hell, but better (for indentation)</li>
+<li>With coroutines: understand coroutines first!</li>
+</ul>
+</section><section id="software-transactional-memory" class="slide level2">
+<h1>Software Transactional Memory</h1>
+<ul>
+<li>Is not popular in C/C++</li>
+<li>PyPy's got some o it, to cope with GIL, not mainstream, yet</li>
+<li>Treat local memory as a database, rollback and retry on race conditions</li>
+</ul>
+</section></section>
+<section><section id="our-future" class="titleslide slide level1"><h1>Our Future</h1></section><section id="atomics-for-flags" class="slide level2">
+<h1>Atomics for flags</h1>
+<ul>
+<li>Is master?</li>
+<li>To quit?</li>
+<li>etc</li>
+<li>Don't use relaxed memory models!</li>
+</ul>
+</section><section id="actor-model-for-data-managers-and-decision-makers" class="slide level2">
+<h1>Actor model for data managers and decision makers:</h1>
+<ul>
+<li>Feature additions/deletions</li>
+<li>Index worker multiplexing</li>
+<li>etc</li>
+</ul>
+</section><section id="futurespromises-for-background-jobs" class="slide level2">
+<h1>Futures/Promises for background jobs</h1>
+<ul>
+<li>Let libraries handle thread pools</li>
+<li>Business logic only cares about data flows</li>
+<li>Wait on client instead of callbacks for maintainability</li>
+<li>Should be rare on servers, Python has better coroutine support</li>
+</ul>
+</section><section id="farther-into-future" class="slide level2">
+<h1>Farther into Future</h1>
+<ul>
+<li>Learn you some go for great good</li>
+<li>Seriously, go is easy to pick up</li>
+<li>Goroutines, spawn as much as you like, no need for pooling!</li>
+<li>Easier communication between threads</li>
+<li>If you're particularly brave: Rust</li>
+<li>Try Elixir to try out Erlang</li>
+</ul>
+</section></section>
+    </div>
+  </div>
+
+  <script src="reveal.js/lib/js/head.min.js"></script>
+  <script src="reveal.js/js/reveal.min.js"></script>
+
+  <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        theme: 'moon', // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+//          { src: 'reveal.js/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; }, }
+//          { src: 'reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+]});
+    </script>
+  </body>
+</html>
