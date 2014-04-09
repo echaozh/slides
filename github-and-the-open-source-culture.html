@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Zhang Yichao zhang_yichao@vobile.cn" />
+  <title>GitHub &amp; the Open Source Culture</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="reveal.js/css/reveal.min.css"/>
+    <style type="text/css">code{white-space: pre;}</style>
+    <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
+  <link rel="stylesheet" media="print" href="reveal.js/css/print/pdf.css" />
+  <!--[if lt IE 9]>
+  <script src="reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">GitHub &amp; the Open Source Culture</h1>
+    <h2 class="author">Zhang Yichao <script type="text/javascript">
+<!--
+h='&#118;&#x6f;&#98;&#x69;&#108;&#x65;&#46;&#x63;&#110;';a='&#64;';n='&#122;&#104;&#x61;&#110;&#x67;&#x5f;&#x79;&#x69;&#x63;&#104;&#x61;&#x6f;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#122;&#104;&#x61;&#110;&#x67;&#x5f;&#x79;&#x69;&#x63;&#104;&#x61;&#x6f;&#32;&#x61;&#116;&#32;&#118;&#x6f;&#98;&#x69;&#108;&#x65;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#110;</noscript></h2>
+    <h3 class="date">4/9/2014</h3>
+</section>
+
+<section><section id="the-open-source-culture" class="titleslide slide level1"><h1>The Open Source Culture</h1></section><section id="open-source-at-large" class="slide level2">
+<h1>Open Source at Large</h1>
+<ul>
+<li>Work on Open Source platforms
+<ul>
+<li>GNU/Linux the Operating System</li>
+<li>gcc &amp; gdb</li>
+<li>vim, terminal emulators, ...</li>
+</ul></li>
+<li>Live with Open Source software
+<ul>
+<li>Android, Linux in embedded systems: TVs, elevators, planes, bus stops, etc</li>
+<li>Chrome, Firefox</li>
+<li>Web sites built with JQuery &amp; other JavaScript frameworks</li>
+<li>...</li>
+</ul></li>
+</ul>
+</section><section id="open-source-movement" class="slide level2">
+<h1>Open Source Movement</h1>
+<ul>
+<li>Use the Source, Luke!
+<ul>
+<li>Build using the source -&gt; portable programs</li>
+<li>Read the source -&gt; learn tricks</li>
+<li>Write the source -&gt; contribute back</li>
+</ul></li>
+<li>To make a difference
+<ul>
+<li>Bug reports are a contribution</li>
+<li>Maintain docs, package for distributions (DHH)</li>
+<li>Write code, ya coders!</li>
+</ul></li>
+</ul>
+</section><section id="open-source-communities" class="slide level2">
+<h1>Open Source Communities</h1>
+<ul>
+<li>News Groups &amp; BBS: dead yet?</li>
+<li>Mailing lists
+<ul>
+<li>List archives</li>
+<li>Google Groups</li>
+</ul></li>
+<li>Forums</li>
+<li>Redit/HackerNews/InfoQ/...</li>
+<li>StackOverflow! ServerFault! StackExchange based sites</li>
+</ul>
+</section></section>
+<section><section id="github" class="titleslide slide level1"><h1>GitHub</h1></section><section id="github-the-web-site" class="slide level2">
+<h1>GitHub the Web Site</h1>
+<ul>
+<li>GitHub is a code sharing social network
+<ul>
+<li>Where you share code, and find code shared</li>
+<li>Meet the people behind the code</li>
+<li>-&gt; Not just code, but the people!</li>
+</ul></li>
+<li>Do you remember Google Code?
+<ul>
+<li>Many projects moved to GitHub</li>
+<li>Google is on GitHub too!</li>
+<li>All code and no people makes Google Code a dull site</li>
+</ul></li>
+</ul>
+</section><section id="on-github" class="slide level2">
+<h1>On GitHub</h1>
+<figure>
+<img src="moved-to-github.png" />
+</figure>
+<figure>
+<img src="google-on-github.png" />
+</figure>
+<figure>
+<img src="facebook-on-github.png" />
+</figure>
+</section><section id="github-tour" class="slide level2">
+<h1>GitHub Tour</h1>
+<ul>
+<li>Repo front page contains everything you need
+<ul>
+<li>README.md as introductory doc</li>
+<li>First sight code listing</li>
+<li>Search box</li>
+<li>How to clone</li>
+<li>Download ZIP</li>
+<li>Fork</li>
+<li>user / repo URL</li>
+</ul></li>
+<li>Wiki: GitHub Flavored Markdown everywhere, including issues</li>
+<li>Issues</li>
+<li>Pull Requests</li>
+<li>Meet the repo owner!</li>
+<li>OAuth &amp; API</li>
+</ul>
+</section><section id="forks-pull-requests" class="slide level2">
+<h1>Forks &amp; Pull Requests</h1>
+<ul>
+<li>Standard git workflow: Linux Kernel
+<ul>
+<li>Distributed, everyone has his own repo</li>
+<li>Send patches to maintainer</li>
+<li>Maintainer reviews &amp; merges</li>
+<li>Linus merges from subtrees (mm, fs, etc) and tags releases</li>
+</ul></li>
+<li>GitHub made it easy: pull requests
+<ul>
+<li>Fork upstream repo</li>
+<li>Update your clone</li>
+<li>Compare with upstream and create a pull request</li>
+<li>Upstream owner reviews &amp; merges</li>
+</ul></li>
+</ul>
+</section><section id="works-for-vobile" class="slide level2">
+<h1>Works for Vobile?</h1>
+<ul>
+<li>Possible workflow
+<ul>
+<li>Experienced team members as module repo owners</li>
+<li>Architect as product repo owner and tags releases</li>
+<li>Everyone forks from owners' repos, and work on clones</li>
+<li>Pull requests to owners, and finally to architects</li>
+<li>Code review after commits but <strong>before merges</strong></li>
+</ul></li>
+<li>GitHub/BitBucket private accounts</li>
+<li>GitHub/BitBucket Enterprise, GitLab, other well baked solutions</li>
+<li>Gitolite for forking without pull requests</li>
+</ul>
+</section></section>
+<section><section id="github-open-source" class="titleslide slide level1"><h1>GitHub &amp; Open Source</h1></section><section id="questions" class="slide level2">
+<h1>Questions?</h1>
+<ul>
+<li>Thanks!</li>
+</ul>
+</section></section>
+    </div>
+  </div>
+
+  <script src="reveal.js/lib/js/head.min.js"></script>
+  <script src="reveal.js/js/reveal.min.js"></script>
+
+  <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        theme: 'moon', // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+//          { src: 'reveal.js/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; }, }
+//          { src: 'reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+]});
+    </script>
+  </body>
+</html>
