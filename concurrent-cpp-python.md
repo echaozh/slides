@@ -1,5 +1,5 @@
 % Concurrent Programming in C++ & Python
-% Zhang Yichao <zhang_yichao@vobile.cn>
+% Zhang Yichao <echaozh@gmail.com>
 % 3/10/2014
 
 # Concurrent Programming
