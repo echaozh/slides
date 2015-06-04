@@ -1,5 +1,5 @@
 % GitHub & the Open Source Culture
-% Zhang Yichao <zhang_yichao@vobile.cn>
+% Zhang Yichao <echaozh@gmail.com>
 % 4/9/2014
 
 # The Open Source Culture
